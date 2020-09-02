@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { Table } from "antd"
-import { MyTag } from "../atoms/tag"
+import { MyTag } from "../../../ui"
 
 const MyTable = () => {
   const [data, setData] = useState()
@@ -41,8 +41,8 @@ const MyTable = () => {
     },
     {
       title: "Подробнее",
-      dataIndex: "datails",
-      key: "datails",
+      dataIndex: "details",
+      key: "details",
     },
   ]
 
