@@ -1,0 +1,1 @@
+export { MyTag } from "./tag"
