@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { Table } from "antd"
-import { MyTag } from "../../../ui"
+import { MyTag } from "@ui"
 
 const MyTable = () => {
   const [data, setData] = useState()
@@ -43,6 +43,7 @@ const MyTable = () => {
       title: "Подробнее",
       dataIndex: "details",
       key: "details",
+      render: (details) => <a href="/#">{details}</a>,
     },
   ]
 
