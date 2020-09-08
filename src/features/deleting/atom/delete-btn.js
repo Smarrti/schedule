@@ -1,9 +1,16 @@
 import React from "react"
 import { MyButton } from "@ui"
+import { handleDelete } from "../model/delete-item"
 
 const DeleteButton = ({ id }) => {
-  console.log(id)
-  return <MyButton text="Удалить" danger />
+  return (
+    <MyButton
+      text="Удалить"
+      type="primary"
+      danger
+      onClick={() => handleDelete(id)}
+    />
+  )
 }
 
 export { DeleteButton }
