@@ -1,19 +1,10 @@
-import React, { useEffect, useState } from "react"
+import React, { useContext } from "react"
 import { Table } from "antd"
 import { MyTag } from "@ui"
+import { DataContext } from "@lib/fetching"
 
 const MyTable = () => {
-  const [data, setData] = useState()
-
-  const fetchData = () => {
-    fetch("https://rs-react-schedule.firebaseapp.com/api/team/sh36team/events")
-      .then((response) => response.json())
-      .then((source) => setData(source.data))
-  }
-
-  useEffect(() => {
-    fetchData()
-  }, [])
+  const data = useContext(DataContext)
 
   const columns = [
     {
