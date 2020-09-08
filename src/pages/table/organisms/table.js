@@ -2,6 +2,7 @@ import React, { useContext } from "react"
 import { Table } from "antd"
 import { MyTag } from "@ui"
 import { DataContext } from "@lib/fetching"
+import { DeleteButton } from "@features/deleting"
 
 const MyTable = () => {
   const data = useContext(DataContext)
@@ -53,24 +54,11 @@ const MyTable = () => {
     },
   ]
 
-  const handleDelete = (id) => {
-    fetch(
-      `https://rs-react-schedule.firebaseapp.com/api/team/sh36team/event/${id}`,
-      {
-        method: "DELETE",
-      }
-    )
-      .then(() => console.log("done"))
-      .catch(() => console.log("not done"))
-  }
-
   return (
     <Table
       columns={columns}
       expandable={{
-        expandedRowRender: (data) => (
-          <button onClick={() => handleDelete(data.id)}>{data.id}</button>
-        ),
+        expandedRowRender: ({ id }) => <DeleteButton id={id} />,
       }}
       dataSource={data}
     />
