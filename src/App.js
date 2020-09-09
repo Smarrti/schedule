@@ -7,6 +7,7 @@ import {
 } from "@ant-design/icons"
 import { MyTable } from "@pages"
 import { DataProvider } from "@lib/fetching"
+import { AddingTaskBtn } from "@features/adding-task"
 
 const { TabPane } = Tabs
 
@@ -47,6 +48,7 @@ const App = () => {
         >
           Here must be a list!
         </TabPane>
+        <AddingTaskBtn />
       </Tabs>
     </DataProvider>
   )
