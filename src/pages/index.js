@@ -1,1 +1,1 @@
-export { MyTable } from "./table/organisms/table"
+export { MyTable } from "./table/table"
