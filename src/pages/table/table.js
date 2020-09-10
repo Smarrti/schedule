@@ -5,6 +5,8 @@ import { DataContext } from "@lib/fetching"
 import { DeleteButton } from "@features/deleting"
 import { TableSizing } from "@features/sizing"
 import { Size } from "@lib/sizing"
+import { AddingTaskBtn } from "@features/adding-task"
+import './table.css';
 
 const MyTable = () => {
   const data = useContext(DataContext)
@@ -64,7 +66,10 @@ const MyTable = () => {
 
   return (
     <>
-      <TableSizing />
+      <div className="table__settings">
+        <TableSizing />
+        <AddingTaskBtn />
+      </div>
       <Table
         columns={columns}
         size={tableSize}
