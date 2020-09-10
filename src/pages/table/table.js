@@ -6,6 +6,7 @@ import { DeleteButton } from "@features/deleting"
 import { TableSizing } from "@features/sizing"
 import { Size } from "@lib/sizing"
 import { AddingTaskBtn } from "@features/adding-task-btn"
+import { AddingTaskForm } from "@features/adding-task-form"
 import './table.css';
 
 const MyTable = () => {
@@ -86,6 +87,10 @@ const MyTable = () => {
         size={tableSize}
         expandable={expandable}
         dataSource={data}
+      />
+      <AddingTaskForm
+        isModalForAddingTaskVisible={isModalForAddingTaskVisible}
+        toggleModalForAddingTaskVisible={toggleModalForAddingTaskVisible}
       />
     </>
   )
