@@ -5,7 +5,7 @@ import { DataContext } from "@lib/fetching"
 import { DeleteButton } from "@features/deleting"
 import { TableSizing } from "@features/sizing"
 import { Size } from "@lib/sizing"
-import { AddingTaskBtn } from "@features/adding-task"
+import { AddingTaskBtn } from "@features/adding-task-btn"
 import './table.css';
 
 const MyTable = () => {
