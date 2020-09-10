@@ -8,48 +8,50 @@ import {
 import { MyTable } from "@pages"
 import { DataProvider } from "@lib/fetching"
 import { AddingTaskBtn } from "@features/adding-task"
+import { SizeContext } from "@lib/sizing"
 
 const { TabPane } = Tabs
 
 const App = () => {
   return (
     <DataProvider>
-      <Tabs defaultActiveKey="1">
-        <TabPane
-          tab={
-            <span>
-              <TableOutlined />
-              Таблица
-            </span>
-          }
-          key="1"
-        >
-          <MyTable />
-        </TabPane>
-        <TabPane
-          tab={
-            <span>
-              <CalendarOutlined />
-              Календарь
-            </span>
-          }
-          key="2"
-        >
-          Here must be a calendar!
-        </TabPane>
-        <TabPane
-          tab={
-            <span>
-              <OrderedListOutlined />
-              Список
-            </span>
-          }
-          key="3"
-        >
-          Here must be a list!
-        </TabPane>
-        <AddingTaskBtn />
-      </Tabs>
+      <SizeContext>
+        <Tabs defaultActiveKey="1">
+          <TabPane
+            tab={
+              <span>
+                <TableOutlined />
+                Таблица
+              </span>
+            }
+            key="1"
+          >
+            <MyTable />
+          </TabPane>
+          <TabPane
+            tab={
+              <span>
+                <CalendarOutlined />
+                Календарь
+              </span>
+            }
+            key="2"
+          >
+            Here must be a calendar!
+          </TabPane>
+          <TabPane
+            tab={
+              <span>
+                <OrderedListOutlined />
+                Список
+              </span>
+            }
+            key="3"
+          >
+            Here must be a list!
+          </TabPane>
+        </Tabs>
+      </SizeContext>
     </DataProvider>
   )
 }

@@ -3,9 +3,13 @@ import { Table } from "antd"
 import { MyTag } from "@ui"
 import { DataContext } from "@lib/fetching"
 import { DeleteButton } from "@features/deleting"
+import { TableSizing } from "@features/sizing"
+import { Size } from "@lib/sizing"
 
 const MyTable = () => {
   const data = useContext(DataContext)
+
+  const { tableSize } = useContext(Size)
 
   const columns = [
     {
@@ -54,14 +58,20 @@ const MyTable = () => {
     },
   ]
 
+  const expandable = {
+    expandedRowRender: ({ id }) => <DeleteButton id={id} />,
+  }
+
   return (
-    <Table
-      columns={columns}
-      expandable={{
-        expandedRowRender: ({ id }) => <DeleteButton id={id} />,
-      }}
-      dataSource={data}
-    />
+    <>
+      <TableSizing />
+      <Table
+        columns={columns}
+        size={tableSize}
+        expandable={expandable}
+        dataSource={data}
+      />
+    </>
   )
 }
 
