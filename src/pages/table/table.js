@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext, useState } from "react"
 import { Table } from "antd"
 import { MyTag } from "@ui"
 import { DataContext } from "@lib/fetching"
@@ -10,6 +10,14 @@ import './table.css';
 
 const MyTable = () => {
   const data = useContext(DataContext)
+
+  const [ isModalForAddingTaskVisible, setModalAddingTaskVisible ] = useState(false);
+
+  const toggleModalForAddingTaskVisible = (isOpen) => {
+    setModalAddingTaskVisible(() => {
+      return isOpen
+    })
+  }
 
   const { tableSize } = useContext(Size)
 
@@ -68,7 +76,10 @@ const MyTable = () => {
     <>
       <div className="table__settings">
         <TableSizing />
-        <AddingTaskBtn />
+        <AddingTaskBtn 
+          isModalForAddingTaskVisible={isModalForAddingTaskVisible}
+          toggleModalForAddingTaskVisible={toggleModalForAddingTaskVisible}
+        />
       </div>
       <Table
         columns={columns}
