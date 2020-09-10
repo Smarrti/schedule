@@ -7,7 +7,6 @@ import {
 } from "@ant-design/icons"
 import { MyTable } from "@pages"
 import { DataProvider } from "@lib/fetching"
-import { AddingTaskBtn } from "@features/adding-task"
 import { SizeContext } from "@lib/sizing"
 
 const { TabPane } = Tabs
