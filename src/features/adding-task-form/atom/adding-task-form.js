@@ -8,11 +8,14 @@ export const AddingTaskForm = ({
   const rulesOfInput = [{
     required: true,
     message: 'Пожалуйста заполните данное поле!'
-  }]
+  }];
+
   return (
     <Modal
       title="Добавить задачу"
       visible={isModalForAddingTaskVisible}
+      onOk={() => toggleModalForAddingTaskVisible(false)}
+      onCancel={() => toggleModalForAddingTaskVisible(false)}
     >
       <Form
         name="addingTaskForm"
