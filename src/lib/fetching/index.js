@@ -8,7 +8,11 @@ const DataProvider = ({ children }) => {
   const fetchData = () => {
     fetch("https://rs-react-schedule.firebaseapp.com/api/team/sh36team/events")
       .then((response) => response.json())
-      .then((source) => setData(source.data))
+      .then((source) => source.data.map((task) => {
+        task.key = task.id;
+        return task;
+      }))
+      .then((source) => setData(source))
   }
 
   useEffect(() => {
