@@ -6,10 +6,11 @@ import {
   DatePicker, 
   TimePicker, 
   InputNumber,
-  Select
+  Select,
+  Button
 } from 'antd';
+import { handleAddingTaskForm } from '../model/adding-task-form';
 const { Option } = Select;
-// import { handleAddingTaskForm } from '../model/adding-task-form';
 
 export const AddingTaskForm = ({ 
   isModalForAddingTaskVisible, toggleModalForAddingTaskVisible
@@ -18,17 +19,23 @@ export const AddingTaskForm = ({
     required: true,
     message: 'Пожалуйста заполните данное поле!'
   }];
-
   return (
     <Modal
       title="Добавить задачу"
       visible={isModalForAddingTaskVisible}
-      onOk={() => toggleModalForAddingTaskVisible(false)}
-      onCancel={() => toggleModalForAddingTaskVisible(false)}
+      footer={[
+        <Button
+          key="close"
+          onClick={() => toggleModalForAddingTaskVisible(false)}
+        >
+          Закрыть
+        </Button>
+      ]}
     >
       <Form
         name="addingTaskForm"
         preserve={false}
+        onFinish={(values) => handleAddingTaskForm(values)}
       >
         <Form.Item
           label="Название задачи"
@@ -61,7 +68,6 @@ export const AddingTaskForm = ({
           <InputNumber 
             min={1}
             max={10}
-            defaultValue={1}
           />
         </Form.Item>
         <Form.Item
@@ -101,6 +107,11 @@ export const AddingTaskForm = ({
         >
           <Input />
         </Form.Item>
+        <Form.Item>
+        <Button type="primary" htmlType="submit">
+          Создать задачу
+        </Button>
+      </Form.Item>
       </Form>
     </Modal>
   )
