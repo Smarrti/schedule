@@ -1,7 +1,6 @@
 export const handleAddingTaskForm = ({
   name, date, time, duration, author, format, tags, materials = '', place
 }) => {
-  debugger;
   let type;
   switch (format) {
     case 'lection':
