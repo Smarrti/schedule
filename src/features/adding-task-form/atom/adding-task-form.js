@@ -39,21 +39,21 @@ export const AddingTaskForm = ({
       >
         <Form.Item
           label="Название задачи"
-          name="nameOfTask"
+          name="name"
           rules={rulesOfInput}
         >
           <Input />
         </Form.Item>
         <Form.Item
           label="Дата"
-          name="dateOfTask"
+          name="date"
           rules={rulesOfInput}
         >
           <DatePicker />
         </Form.Item>
         <Form.Item
           label="Время"
-          name="timeOfTask"
+          name="time"
           rules={rulesOfInput}
         >
           <TimePicker
@@ -62,7 +62,7 @@ export const AddingTaskForm = ({
         </Form.Item>
         <Form.Item
           label="Продолжительность в часах"
-          name="durationOfTask"
+          name="duration"
           rules={rulesOfInput}
         >
           <InputNumber 
@@ -72,14 +72,14 @@ export const AddingTaskForm = ({
         </Form.Item>
         <Form.Item
           label="Лектор"
-          name="lecturerOfTask"
+          name="author"
           rules={rulesOfInput}
         >
           <Input />
         </Form.Item>
         <Form.Item
           label="Формат"
-          name="formatOfTask"
+          name="type"
           rules={rulesOfInput}
         >
           <Select>
@@ -89,21 +89,21 @@ export const AddingTaskForm = ({
         </Form.Item>
         <Form.Item
           label="Теги (через запятую)"
-          name="tagsOfTask"
+          name="tags"
           rules={rulesOfInput}
         >
           <Input />
         </Form.Item>
         <Form.Item
           label="Место"
-          name="placeOfTask"
+          name="place"
           rules={rulesOfInput}
         >
           <Input />
         </Form.Item>
         <Form.Item
           label="Доп. материалы"
-          name="materialsOfTask"
+          name="materials"
         >
           <Input />
         </Form.Item>
