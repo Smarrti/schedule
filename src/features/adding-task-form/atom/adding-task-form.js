@@ -23,6 +23,7 @@ export const AddingTaskForm = ({
     <Modal
       title="Добавить задачу"
       visible={isModalForAddingTaskVisible}
+      onCancel={() => toggleModalForAddingTaskVisible(false)}
       footer={[
         <Button
           key="close"
