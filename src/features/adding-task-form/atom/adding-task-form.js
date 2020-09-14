@@ -35,7 +35,10 @@ export const AddingTaskForm = ({
       <Form
         name="addingTaskForm"
         preserve={false}
-        onFinish={(values) => handleAddingTaskForm(values)}
+        onFinish={(values) => {
+          handleAddingTaskForm(values);
+          toggleModalForAddingTaskVisible(false);
+        }}
       >
         <Form.Item
           label="Название задачи"
