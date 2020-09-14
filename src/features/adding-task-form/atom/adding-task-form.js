@@ -89,6 +89,13 @@ export const AddingTaskForm = ({
           <Input />
         </Form.Item>
         <Form.Item
+          label="Место"
+          name="placeOfTask"
+          rules={rulesOfInput}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
           label="Доп. материалы"
           name="materialsOfTask"
         >
