@@ -79,7 +79,7 @@ export const AddingTaskForm = ({
         </Form.Item>
         <Form.Item
           label="Формат"
-          name="type"
+          name="format"
           rules={rulesOfInput}
         >
           <Select>
