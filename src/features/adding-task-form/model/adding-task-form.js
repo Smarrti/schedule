@@ -24,14 +24,18 @@ export const handleAddingTaskForm = ({
     place,
     optional: materials
   };
-  console.log(taskContent);
-  // fetch(
-  //   `https://rs-react-schedule.firebaseapp.com/api/team/sh36team/event`,
-  //   {
-  //     method: "POST",
-  //     body: JSON.stringify(taskContent)
-  //   }
-  // )
-  // .then(() => console.log('Good!'))
-  // .catch(() => console.log('bad'))
+  console.log(JSON.stringify(taskContent));
+  fetch(
+    `https://rs-react-schedule.firebaseapp.com/api/team/sh36team/event/`,
+    {
+      method: "POST",
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(taskContent)
+    }
+  )
+  .then(() => console.log('Good!'))
+  .catch(() => console.log('bad'))
 }
