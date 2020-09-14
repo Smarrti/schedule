@@ -6,6 +6,7 @@ import {
   OrderedListOutlined,
 } from "@ant-design/icons"
 import { MyTable } from "@pages"
+import { MyCalendar } from "@pages"
 import { DataProvider } from "@lib/fetching"
 import { SizeContext } from "@lib/sizing"
 
@@ -36,7 +37,7 @@ const App = () => {
             }
             key="2"
           >
-            Here must be a calendar!
+            <MyCalendar />
           </TabPane>
           <TabPane
             tab={
