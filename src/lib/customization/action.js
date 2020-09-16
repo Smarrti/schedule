@@ -8,6 +8,7 @@ import {
 } from "./types"
 
 export const changeTableBgLecture = (payload) => {
+  localStorage.setItem("table-bg-lecture", payload)
   return {
     type: CHANGE_TABLE_BG_LECTURE,
     payload,
@@ -23,6 +24,7 @@ export const changeTableBgPractice = (payload) => {
 }
 
 export const changeTableFontColorLecture = (payload) => {
+  localStorage.setItem("table-font-lecture", payload)
   return {
     type: CHANGE_TABLE_FONT_COLOR_LECTURE,
     payload,
@@ -30,6 +32,7 @@ export const changeTableFontColorLecture = (payload) => {
 }
 
 export const changeTableFontColorPractice = (payload) => {
+  localStorage.setItem("table-font-practice", payload)
   return {
     type: CHANGE_TABLE_FONT_COLOR_PRACTICE,
     payload,
@@ -37,6 +40,15 @@ export const changeTableFontColorPractice = (payload) => {
 }
 
 export const resetTableStyles = () => {
+  const keys = [
+    "table-bg-lecture",
+    "table-bg-practice",
+    "table-font-lecture",
+    "table-font-practice",
+  ]
+
+  keys.forEach((key) => localStorage.removeItem(key))
+
   return {
     type: RESET_TABLE_STYLES,
   }
