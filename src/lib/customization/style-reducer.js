@@ -3,6 +3,7 @@ import {
   CHANGE_BG_PRACTICE,
   CHANGE_FONT_COLOR_LECTURE,
   CHANGE_FONT_COLOR_PRACTICE,
+  RESET_TABLE_STYLES,
 } from "./types"
 
 export const styleStore = {
@@ -50,6 +51,23 @@ export const styleReducer = (state, action) => {
         table: {
           ...state.table,
           practice: { ...state.table.practice, fontColor: action.payload },
+        },
+      }
+    case RESET_TABLE_STYLES:
+      return {
+        ...state,
+        table: {
+          ...state.table,
+          lecture: {
+            ...state.table.lecture,
+            background: "blueBG",
+            fontColor: "blackFont",
+          },
+          practice: {
+            ...state.table.practice,
+            background: "orangeBG",
+            fontColor: "blackFont",
+          },
         },
       }
     default:

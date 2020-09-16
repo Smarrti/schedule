@@ -3,6 +3,7 @@ import {
   CHANGE_BG_PRACTICE,
   CHANGE_FONT_COLOR_LECTURE,
   CHANGE_FONT_COLOR_PRACTICE,
+  RESET_TABLE_STYLES,
 } from "./types"
 
 export const changeBgLecture = (payload) => {
@@ -30,5 +31,11 @@ export const changeFontColorPractice = (payload) => {
   return {
     type: CHANGE_FONT_COLOR_PRACTICE,
     payload,
+  }
+}
+
+export const resetTableStyles = () => {
+  return {
+    type: RESET_TABLE_STYLES,
   }
 }
