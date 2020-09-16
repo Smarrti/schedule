@@ -87,6 +87,7 @@ const MyTable = () => {
         size={tableSize}
         expandable={expandable}
         dataSource={data}
+        scroll={{x: true}}
       />
       <AddingTaskForm
         isModalForAddingTaskVisible={isModalForAddingTaskVisible}
