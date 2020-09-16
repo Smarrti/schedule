@@ -1,12 +1,14 @@
 import React, { useContext } from "react"
 import { Calendar, Button } from "antd"
 import { DataContext } from "@lib/fetching"
+import { Size } from "@lib/sizing"
 import { CalendarSizing } from "@features/sizing"
 
 import "./calendar.css"
 
 const MyCalendar = () => {
   const data = useContext(DataContext)
+  const { calendarSize } = useContext(Size)
 
   const eventClasses = (item) => {
     let className
@@ -60,12 +62,12 @@ const MyCalendar = () => {
     )
   }
 
-  return (
+  return data ? (
     <>
       <CalendarSizing />
-      <Calendar dateCellRender={dateCellRender} />
+      <Calendar dateCellRender={dateCellRender} fullscreen={calendarSize} />
     </>
-  )
+  ) : null
 }
 
 export { MyCalendar }
