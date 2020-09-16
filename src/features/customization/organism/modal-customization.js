@@ -3,8 +3,13 @@ import { MyButton } from "@ui"
 import Modal from "antd/lib/modal/Modal"
 import { SettingOutlined } from "@ant-design/icons"
 
-const ModalCustomization = ({ children }) => {
+const ModalCustomization = ({ children, resetTableStyles }) => {
   const [visible, setVisible] = useState(false)
+
+  const handleReset = () => {
+    setVisible(false)
+    resetTableStyles()
+  }
 
   return (
     <>
@@ -18,8 +23,18 @@ const ModalCustomization = ({ children }) => {
         visible={visible}
         onCancel={() => setVisible(false)}
         footer={[
-          <MyButton key="cancel" type="danger" text="Отменить" />,
-          <MyButton key="submit" type="primary" text="Принять" />,
+          <MyButton
+            key="cancel"
+            type="danger"
+            text="Сбросить"
+            onClick={handleReset}
+          />,
+          <MyButton
+            key="submit"
+            type="primary"
+            text="Принять"
+            onClick={() => setVisible(false)}
+          />,
         ]}
       >
         {children}

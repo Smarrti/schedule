@@ -8,12 +8,13 @@ import {
   changeFontColorLecture,
   changeFontColorPractice,
 } from "@lib/customization"
+import { resetTableStyles } from "@lib/customization"
 
 const TableCustomization = () => {
   const { dispatch } = useContext(Style)
 
   return (
-    <ModalCustomization>
+    <ModalCustomization resetTableStyles={() => dispatch(resetTableStyles())}>
       <RadioGroups
         changeBgLecture={(e) => dispatch(changeBgLecture(e.target.value))}
         changeBgPractice={(e) => dispatch(changeBgPractice(e.target.value))}
