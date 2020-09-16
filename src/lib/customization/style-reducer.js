@@ -1,8 +1,8 @@
 import {
-  CHANGE_BG_LECTURE,
-  CHANGE_BG_PRACTICE,
-  CHANGE_FONT_COLOR_LECTURE,
-  CHANGE_FONT_COLOR_PRACTICE,
+  CHANGE_TABLE_BG_LECTURE,
+  CHANGE_TABLE_BG_PRACTICE,
+  CHANGE_TABLE_FONT_COLOR_LECTURE,
+  CHANGE_TABLE_FONT_COLOR_PRACTICE,
   RESET_TABLE_STYLES,
 } from "./types"
 
@@ -21,7 +21,7 @@ export const styleStore = {
 
 export const styleReducer = (state, action) => {
   switch (action.type) {
-    case CHANGE_BG_LECTURE:
+    case CHANGE_TABLE_BG_LECTURE:
       return {
         ...state,
         table: {
@@ -29,7 +29,7 @@ export const styleReducer = (state, action) => {
           lecture: { ...state.table.lecture, background: action.payload },
         },
       }
-    case CHANGE_BG_PRACTICE:
+    case CHANGE_TABLE_BG_PRACTICE:
       return {
         ...state,
         table: {
@@ -37,7 +37,7 @@ export const styleReducer = (state, action) => {
           practice: { ...state.table.practice, background: action.payload },
         },
       }
-    case CHANGE_FONT_COLOR_LECTURE:
+    case CHANGE_TABLE_FONT_COLOR_LECTURE:
       return {
         ...state,
         table: {
@@ -45,7 +45,7 @@ export const styleReducer = (state, action) => {
           lecture: { ...state.table.practice, fontColor: action.payload },
         },
       }
-    case CHANGE_FONT_COLOR_PRACTICE:
+    case CHANGE_TABLE_FONT_COLOR_PRACTICE:
       return {
         ...state,
         table: {
