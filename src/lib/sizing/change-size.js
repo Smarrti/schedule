@@ -6,7 +6,7 @@ import {
 
 export const sizes = {
   tableSize: "middle",
-  calendarSize: false,
+  calendarSize: "small",
 }
 
 export const sizeReducer = (state, action) => {
@@ -16,10 +16,11 @@ export const sizeReducer = (state, action) => {
     case CHANGE_CALENDAR_SIZE:
       return { ...state, calendarSize: action.payload }
     case GET_SIZES_FROM_LS:
-      const sizeReceivedFromLS = localStorage.getItem("table-size")
-      return sizeReceivedFromLS
-        ? { ...state, tableSize: sizeReceivedFromLS }
-        : { ...state }
+      return {
+        ...state,
+        tableSize: localStorage.getItem("table-size") || "middle",
+        calendarSize: localStorage.getItem("calendar-size") || "small",
+      }
 
     default:
       return { ...state }

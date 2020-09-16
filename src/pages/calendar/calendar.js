@@ -62,10 +62,15 @@ const MyCalendar = () => {
     )
   }
 
+  console.log(calendarSize)
+
   return data ? (
     <>
       <CalendarSizing />
-      <Calendar dateCellRender={dateCellRender} fullscreen={calendarSize} />
+      <Calendar
+        dateCellRender={dateCellRender}
+        fullscreen={calendarSize === "small" ? false : true}
+      />
     </>
   ) : (
     <Spinner />
