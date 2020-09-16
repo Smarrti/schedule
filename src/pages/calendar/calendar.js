@@ -3,7 +3,7 @@ import { Calendar, Button } from "antd"
 import { DataContext } from "@lib/fetching"
 import { Size } from "@lib/sizing"
 import { CalendarSizing } from "@features/sizing"
-
+import { Spinner } from "@ui"
 import "./calendar.css"
 
 const MyCalendar = () => {
@@ -67,7 +67,9 @@ const MyCalendar = () => {
       <CalendarSizing />
       <Calendar dateCellRender={dateCellRender} fullscreen={calendarSize} />
     </>
-  ) : null
+  ) : (
+    <Spinner />
+  )
 }
 
 export { MyCalendar }
