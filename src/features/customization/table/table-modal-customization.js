@@ -3,10 +3,10 @@ import { Style } from "@lib/customization"
 import { ModalCustomization } from "../organism/modal-customization"
 import { RadioGroups } from "../organism/radio-groups"
 import {
-  changeBgLecture,
-  changeBgPractice,
-  changeFontColorLecture,
-  changeFontColorPractice,
+  changeTableBgLecture,
+  changeTableBgPractice,
+  changeTableFontColorLecture,
+  changeTableFontColorPractice,
 } from "@lib/customization"
 import { resetTableStyles } from "@lib/customization"
 
@@ -14,15 +14,17 @@ const TableCustomization = () => {
   const { dispatch } = useContext(Style)
 
   return (
-    <ModalCustomization resetTableStyles={() => dispatch(resetTableStyles())}>
+    <ModalCustomization resetStyles={() => dispatch(resetTableStyles())}>
       <RadioGroups
-        changeBgLecture={(e) => dispatch(changeBgLecture(e.target.value))}
-        changeBgPractice={(e) => dispatch(changeBgPractice(e.target.value))}
+        changeBgLecture={(e) => dispatch(changeTableBgLecture(e.target.value))}
+        changeBgPractice={(e) =>
+          dispatch(changeTableBgPractice(e.target.value))
+        }
         changeFontColorLecture={(e) =>
-          dispatch(changeFontColorLecture(e.target.value))
+          dispatch(changeTableFontColorLecture(e.target.value))
         }
         changeFontColorPractice={(e) =>
-          dispatch(changeFontColorPractice(e.target.value))
+          dispatch(changeTableFontColorPractice(e.target.value))
         }
       />
     </ModalCustomization>
