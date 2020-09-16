@@ -7,6 +7,10 @@ import classes from "../style.module.css"
 const { TabPane } = Tabs
 
 const RadioGroups = ({
+  lectureBg,
+  practiceBg,
+  lectureFont,
+  practiceFont,
   changeBgLecture,
   changeBgPractice,
   changeFontColorLecture,
@@ -17,7 +21,7 @@ const RadioGroups = ({
       <TabPane tab="Лекции" key="1">
         <RadioSection
           title="Фон:"
-          defaultValue="blueBG"
+          defaultValue={lectureBg}
           onChange={changeBgLecture}
         >
           <RadioButton className={classes.blueBG} value="blueBG" text="Синий" />
@@ -35,7 +39,7 @@ const RadioGroups = ({
         </RadioSection>
         <RadioSection
           title="Цвет шрифта:"
-          defaultValue="blackFont"
+          defaultValue={lectureFont}
           onChange={changeFontColorLecture}
         >
           <RadioButton
@@ -63,7 +67,7 @@ const RadioGroups = ({
       <TabPane tab="Практические занятия" key="2">
         <RadioSection
           title="Фон:"
-          defaultValue="orangeBG"
+          defaultValue={practiceBg}
           onChange={changeBgPractice}
         >
           <RadioButton
@@ -81,7 +85,7 @@ const RadioGroups = ({
         </RadioSection>
         <RadioSection
           title="Цвет шрифта:"
-          defaultValue="blackFont"
+          defaultValue={practiceFont}
           onChange={changeFontColorPractice}
         >
           <RadioButton
