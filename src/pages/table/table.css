@@ -1,0 +1,7 @@
+.table__settings {
+  display: flex;
+}
+
+.table__settings > * {
+  margin-right: 10px;
+}
