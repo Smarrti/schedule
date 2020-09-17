@@ -1,0 +1,14 @@
+.buttons_block{
+    display: flex;
+    padding: 10px 20px;
+    justify-content: space-between;
+}
+.left_buttons_block{
+
+}
+.button {
+    margin-right: 5px;
+}
+.addTask, .editTask, .deleteTask {
+    margin-right: 5px;
+}
