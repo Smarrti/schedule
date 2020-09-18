@@ -19,7 +19,7 @@ const Header = (props) => {
     <header>
       <div className={s.buttons_block}>
         <div className={s.left_buttons_block}>
-          {user && (
+          {!user && (
             <Button
               className={s.addTask}
               type="default"
@@ -27,7 +27,7 @@ const Header = (props) => {
               icon={<PlusOutlined />}
             ></Button>
           )}
-          {user && (
+          {!user && (
             <Button
               className={s.editTask}
               size="large"
@@ -35,7 +35,7 @@ const Header = (props) => {
               icon={<EditOutlined />}
             ></Button>
           )}
-          {user && (
+          {!user && (
             <Button
               className={s.deleteTask}
               size="large"
