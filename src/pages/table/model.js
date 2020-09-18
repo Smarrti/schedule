@@ -1,6 +1,6 @@
-import React from "react"
-import { MyTag } from "@ui"
-import classes from "@features/customization/style.module.css"
+import React from "react";
+import { MyTag } from "@ui";
+import classes from "@features/customization/style.module.css";
 
 export const setRowStyleByType = (type, table) => {
   switch (type) {
@@ -8,16 +8,16 @@ export const setRowStyleByType = (type, table) => {
       return [
         classes[table.lecture.background],
         classes[table.lecture.fontColor],
-      ]
+      ];
     case "Практическое занятие":
       return [
         classes[table.practice.background],
         classes[table.practice.fontColor],
-      ]
+      ];
     default:
-      return null
+      return null;
   }
-}
+};
 
 export const columns = [
   {
@@ -51,7 +51,20 @@ export const columns = [
     title: "Формат",
     dataIndex: "type",
     key: "type",
+    filters: [
+      {
+        text: "Лекция",
+        value: "Лекция",
+      },
+      {
+        text: "Практическое задание",
+        value: "Практическое",
+      },
+    ],
+    onFilter: (value, record) => record.type.indexOf(value) === 0,
+    sorter: (a, b) => a.type.length - b.type.length,
   },
+
   {
     title: "Теги",
     dataIndex: "tags",
@@ -64,4 +77,4 @@ export const columns = [
     key: "optional",
     render: (optional) => <a href="/#">{optional}</a>,
   },
-]
+];
