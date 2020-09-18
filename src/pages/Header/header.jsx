@@ -19,10 +19,12 @@ const Header = () => {
                     {user && <Button className={s.addTask} type="default" size="large" icon={<PlusOutlined/>}></Button>}
                     {user && <Button className={s.editTask} size="large" type="default" icon={<EditOutlined />}></Button>}
                     {user && <Button className={s.deleteTask} size="large" type="default" icon={<DeleteOutlined/>}></Button>}
-
-                    <Button className={s.saveTable} size="large" type="default" icon={<SaveOutlined />}>
-                      <TableSave />
-                    </Button>
+                    <TableSave
+                      className={s.saveTable}
+                      size="large"
+                      type="default"
+                      icon={<SaveOutlined />}
+                    />
                 </div>
                 <div className={s.right_buttons_block}>
                     <Button className={s.button} type="default" size="large" onClick={toggleUser}>

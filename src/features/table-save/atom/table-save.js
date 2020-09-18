@@ -1,7 +1,8 @@
 import React from 'react';
-import { CSVLink } from 'react-csv'
+import { Button } from "antd";
+import { CSVLink } from 'react-csv';
 
-export const TableSave = () => {
+export const TableSave = ({ ...propertiesOfButton }) => {
   const headers = [
     { label: "First Name", key: "firstname" },
     { label: "Last Name", key: "lastname" },
@@ -15,6 +16,10 @@ export const TableSave = () => {
   ];
 
   return (
-    <CSVLink data={data} headers={headers} />
+    <CSVLink data={data} headers={headers}>
+      <Button
+        {...propertiesOfButton}
+      />
+    </CSVLink>
   )
 };
