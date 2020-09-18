@@ -8,7 +8,6 @@ export const switchRole = (state, action) => {
       localStorage.setItem("user", !state.user);
       return { ...state, user: !state.user };
     case "GET_ROLE_FROM_LS":
-      console.log(localStorage.getItem("user"));
       return { ...state, user: localStorage.getItem("user") === "true" };
     default:
       return { ...state };
