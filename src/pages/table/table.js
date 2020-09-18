@@ -1,38 +1,42 @@
-import React, { useContext, useState } from "react"
-import { Table } from "antd"
-import { DataContext } from "@lib/fetching"
-import { DeleteButton } from "@features/deleting"
-import { TableSizing } from "@features/sizing"
-import { TableCustomization } from "@features/customization"
-import { Size } from "@lib/sizing"
-import { Style } from "@lib/customization"
-import { columns, setRowStyleByType } from "./model"
-import { AddingTaskBtn } from "@features/adding-task-btn"
-import { AddingTaskForm } from "@features/adding-task-form"
+import React, { useContext, useState } from "react";
+import { Table } from "antd";
+import { DataContext } from "@lib/fetching";
+import { DeleteButton } from "@features/deleting";
+import { TableSizing } from "@features/sizing";
+import { TableCustomization } from "@features/customization";
+import { Size } from "@lib/sizing";
+import { Style } from "@lib/customization";
+import { Role } from "@lib/roles";
+import { columns, setRowStyleByType } from "./model";
+import { AddingTaskBtn } from "@features/adding-task-btn";
+import { AddingTaskForm } from "@features/adding-task-form";
 
 const MyTable = () => {
-  const data = useContext(DataContext)
+  const data = useContext(DataContext);
+  const { user } = useContext(Role);
+  const { tableSize } = useContext(Size);
+  const { table } = useContext(Style);
 
-  const [ isModalForAddingTaskVisible, setModalAddingTaskVisible ] = useState(false);
+  const [isModalForAddingTaskVisible, setModalAddingTaskVisible] = useState(
+    false
+  );
 
   const toggleModalForAddingTaskVisible = (isOpen) => {
     setModalAddingTaskVisible(() => {
-      return isOpen
-    })
-  }
-  const { tableSize } = useContext(Size)
-  const { table } = useContext(Style)
+      return isOpen;
+    });
+  };
 
   const expandable = {
-    expandedRowRender: ({ id }) => <DeleteButton id={id} />,
-  }
+    expandedRowRender: !user ? ({ id }) => <DeleteButton id={id} /> : null,
+  };
 
   return (
     <>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <TableSizing />
         <TableCustomization />
-        <AddingTaskBtn 
+        <AddingTaskBtn
           isModalForAddingTaskVisible={isModalForAddingTaskVisible}
           toggleModalForAddingTaskVisible={toggleModalForAddingTaskVisible}
         />
@@ -43,14 +47,14 @@ const MyTable = () => {
         expandable={expandable}
         dataSource={data}
         rowClassName={(record) => setRowStyleByType(record.type, table)}
-        scroll={{x: true}}
+        scroll={{ x: true }}
       />
       <AddingTaskForm
         isModalForAddingTaskVisible={isModalForAddingTaskVisible}
         toggleModalForAddingTaskVisible={toggleModalForAddingTaskVisible}
       />
     </>
-  )
-}
+  );
+};
 
-export { MyTable }
+export { MyTable };
