@@ -5,8 +5,9 @@ import PlusOutlined from "@ant-design/icons/lib/icons/PlusOutlined";
 import EditOutlined from "@ant-design/icons/lib/icons/EditOutlined";
 import DeleteOutlined from "@ant-design/icons/lib/icons/DeleteOutlined";
 import SaveOutlined from "@ant-design/icons/lib/icons/SaveOutlined";
+import { TableSave } from '@features/table-save';
 
-const Header = (props) => {
+const Header = () => {
     const [user, setUser] = useState(true);
     const toggleUser = () => {
         user === true ? setUser(false):setUser(true)
@@ -18,7 +19,10 @@ const Header = (props) => {
                     {user && <Button className={s.addTask} type="default" size="large" icon={<PlusOutlined/>}></Button>}
                     {user && <Button className={s.editTask} size="large" type="default" icon={<EditOutlined />}></Button>}
                     {user && <Button className={s.deleteTask} size="large" type="default" icon={<DeleteOutlined/>}></Button>}
-                    <Button className={s.saveTable} size="large" type="default" icon={<SaveOutlined />}></Button>
+
+                    <Button className={s.saveTable} size="large" type="default" icon={<SaveOutlined />}>
+                      <TableSave />
+                    </Button>
                 </div>
                 <div className={s.right_buttons_block}>
                     <Button className={s.button} type="default" size="large" onClick={toggleUser}>

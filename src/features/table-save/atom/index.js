@@ -1,1 +1,1 @@
-export { TableExport } from './table-save';
+export { TableSave } from './table-save';
