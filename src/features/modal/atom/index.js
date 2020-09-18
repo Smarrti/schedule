@@ -1,0 +1,1 @@
+export { WindowModal } from './modal';
