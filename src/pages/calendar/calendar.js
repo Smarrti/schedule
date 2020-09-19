@@ -1,8 +1,7 @@
 import React, { useContext } from "react"
 import { Calendar, Button } from "antd"
 import { DataContext } from "@lib/fetching"
-import { Size } from "@lib/sizing"
-import { CalendarSizing } from "@features/sizing"
+import { Size, CalendarSizing } from "@lib/sizing"
 import { Spinner } from "@ui"
 import "./calendar.css"
 
@@ -61,8 +60,6 @@ const MyCalendar = () => {
       </ul>
     )
   }
-
-  console.log(calendarSize)
 
   return data ? (
     <>
