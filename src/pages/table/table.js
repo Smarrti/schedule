@@ -14,6 +14,7 @@ import classes from "./style.module.css";
 
 const MyTable = () => {
   const data = useContext(DataContext);
+
   const { user } = useContext(Role);
   const { tableSize } = useContext(Size);
   const { table } = useContext(Style);
