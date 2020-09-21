@@ -21,11 +21,13 @@ const MyTable = () => {
       return isOpen;
     });
   };
+
   const { tableSize } = useContext(Size);
   const { table } = useContext(Style);
 
   const expandable = {
     expandedRowRender: ({ id }) => <DeleteButton id={id} />,
+
   };
 
   return (
