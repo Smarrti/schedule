@@ -15,9 +15,9 @@ const Header = (props) => {
         <header>
             <div className={s.buttons_block}>
                 <div className={s.left_buttons_block}>
-                    {user && <Button className={s.addTask} type="default" size="large" icon={<PlusOutlined/>}></Button>}
-                    {user && <Button className={s.editTask} size="large" type="default" icon={<EditOutlined />}></Button>}
-                    {user && <Button className={s.deleteTask} size="large" type="default" icon={<DeleteOutlined/>}></Button>}
+                    {!user && <Button className={s.addTask} type="default" size="large" icon={<PlusOutlined/>}></Button>}
+                    {!user && <Button className={s.editTask} size="large" type="default" icon={<EditOutlined />}></Button>}
+                    {!user && <Button className={s.deleteTask} size="large" type="default" icon={<DeleteOutlined/>}></Button>}
                     <Button className={s.saveTable} size="large" type="default" icon={<SaveOutlined />}></Button>
                 </div>
                 <div className={s.right_buttons_block}>

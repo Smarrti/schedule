@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react"
+import React, {createContext, useContext, useEffect, useState} from "react"
 import { Table } from "antd"
 import { DataContext } from "@lib/fetching"
 import { DeleteButton } from "@features/deleting"
@@ -12,7 +12,6 @@ import { AddingTaskForm } from "@features/adding-task-form"
 
 const MyTable = () => {
   const data = useContext(DataContext)
-
   const [ isModalForAddingTaskVisible, setModalAddingTaskVisible ] = useState(false);
 
   const toggleModalForAddingTaskVisible = (isOpen) => {
@@ -26,7 +25,6 @@ const MyTable = () => {
   const expandable = {
     expandedRowRender: ({ id }) => <DeleteButton id={id} />,
   }
-
   return (
     <>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
