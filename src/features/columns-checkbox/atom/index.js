@@ -1,1 +1,1 @@
-export { ColumnCheckbox } from './colomn-checkbox-btn';
+export { ColumnCheckbox } from './column-checkbox-btn';
