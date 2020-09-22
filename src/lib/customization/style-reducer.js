@@ -5,7 +5,7 @@ import {
   CHANGE_TABLE_FONT_COLOR_PRACTICE,
   GET_TABLE_STYLES_FROM_LS,
   RESET_TABLE_STYLES,
-} from "./types"
+} from "./types";
 
 export const styleStore = {
   table: {
@@ -18,7 +18,7 @@ export const styleStore = {
       fontColor: "blackFont",
     },
   },
-}
+};
 
 export const styleReducer = (state, action) => {
   switch (action.type) {
@@ -29,7 +29,7 @@ export const styleReducer = (state, action) => {
           ...state.table,
           lecture: { ...state.table.lecture, background: action.payload },
         },
-      }
+      };
     case CHANGE_TABLE_BG_PRACTICE:
       return {
         ...state,
@@ -37,15 +37,15 @@ export const styleReducer = (state, action) => {
           ...state.table,
           practice: { ...state.table.practice, background: action.payload },
         },
-      }
+      };
     case CHANGE_TABLE_FONT_COLOR_LECTURE:
       return {
         ...state,
         table: {
           ...state.table,
-          lecture: { ...state.table.practice, fontColor: action.payload },
+          lecture: { ...state.table.lecture, fontColor: action.payload },
         },
-      }
+      };
     case CHANGE_TABLE_FONT_COLOR_PRACTICE:
       return {
         ...state,
@@ -53,7 +53,7 @@ export const styleReducer = (state, action) => {
           ...state.table,
           practice: { ...state.table.practice, fontColor: action.payload },
         },
-      }
+      };
     case GET_TABLE_STYLES_FROM_LS:
       return {
         ...state,
@@ -72,7 +72,7 @@ export const styleReducer = (state, action) => {
               localStorage.getItem("table-font-practice") || "blackFont",
           },
         },
-      }
+      };
     case RESET_TABLE_STYLES:
       return {
         ...state,
@@ -89,8 +89,8 @@ export const styleReducer = (state, action) => {
             fontColor: "blackFont",
           },
         },
-      }
+      };
     default:
-      return { ...state }
+      return { ...state };
   }
-}
+};
