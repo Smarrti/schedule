@@ -1,25 +1,38 @@
-import React from 'react';
+import React, { useState, useEffect, createRef } from 'react';
 import { Button } from "antd";
 import { CSVLink } from 'react-csv';
+import { getTasks } from '@lib/getTasks';
 
 export const TableSave = ({ ...propertiesOfButton }) => {
-  const headers = [
-    { label: "First Name", key: "firstname" },
-    { label: "Last Name", key: "lastname" },
-    { label: "Email", key: "email" }
-  ];
+  const [dataTasks, setDataTasks] = useState([]);
+  const [readyToDownload, setReadyDownload] = useState(false);
+  const csvLink = createRef();
 
-  const data = [
-    { firstname: "Ahmed", lastname: "Tomi", email: "ah@smthing.co.com" },
-    { firstname: "Raed", lastname: "Labes", email: "rl@smthing.co.com" },
-    { firstname: "Yezzi", lastname: "Min l3b", email: "ymin@cocococo.com" }
-  ];
+  useEffect(() => {
+    if (readyToDownload) {
+      setReadyDownload(false);
+      csvLink.current.link.click();
+    }
+  }, [csvLink, dataTasks, readyToDownload]);
+
+  const handleTaskDownload = async () => {
+    const tasks = await getTasks();
+    await setDataTasks(tasks);
+    setReadyDownload(true);
+  }
 
   return (
-    <CSVLink data={data} headers={headers}>
+    <>
       <Button
         {...propertiesOfButton}
+        onClick={() => handleTaskDownload()}
       />
-    </CSVLink>
+      <CSVLink
+        data={dataTasks}
+        ref={csvLink}
+        target="_blank"
+        filename="tasks.csv"
+      />
+    </>
   )
 };
