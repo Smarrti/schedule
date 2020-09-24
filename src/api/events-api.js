@@ -8,9 +8,10 @@ export const eventsAPI = {
         return instance.get(`event/${eventId}`).then(response => response.data)
     },
     addEvent(event){
-        return instance.post(`event`).then(response => response.data);
+        return instance.post(`event`, event).then(response => response.data);
     },
-    updateEvent(eventId, event){
+    updateEvent(event, eventId){
+      console.log(eventId);
         return instance.put(`event/${eventId}`, event).then(response => response.data)
     },
     deleteEvent(eventId){

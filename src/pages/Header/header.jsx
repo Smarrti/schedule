@@ -2,30 +2,40 @@ import React, { useState } from 'react';
 import s from './header.module.css';
 import { Button } from "antd";
 import PlusOutlined from "@ant-design/icons/lib/icons/PlusOutlined";
-import EditOutlined from "@ant-design/icons/lib/icons/EditOutlined";
-import DeleteOutlined from "@ant-design/icons/lib/icons/DeleteOutlined";
 import SaveOutlined from "@ant-design/icons/lib/icons/SaveOutlined";
+import {useDispatch, useSelector} from "react-redux";
+import {getModalForAddingTaskVisible, getRights} from "../../lib/redux/selectors";
+import {actions} from "../../lib/redux/eventsReducer";
+import {AddingTaskForm} from "../../features/adding-task-form/atom";
 
 const Header = (props) => {
-    const [user, setUser] = useState(true);
+    const dispatch = useDispatch();
+    const user = useSelector(getRights)
     const toggleUser = () => {
-        user === true ? setUser(false):setUser(true)
+        user === true ? dispatch(actions.toggleRights(false)):dispatch(actions.toggleRights(true))
     };
+    const isModalForAddingTaskVisible = useSelector(getModalForAddingTaskVisible);
+    const toggleModalForAddingTaskVisible = (isOpen) => {
+     dispatch(actions.setModalAddingTaskVisible(isOpen));
+    }
     return (
         <header>
             <div className={s.buttons_block}>
                 <div className={s.left_buttons_block}>
-                    {!user && <Button className={s.addTask} type="default" size="large" icon={<PlusOutlined/>}></Button>}
-                    {!user && <Button className={s.editTask} size="large" type="default" icon={<EditOutlined />}></Button>}
-                    {!user && <Button className={s.deleteTask} size="large" type="default" icon={<DeleteOutlined/>}></Button>}
+                    {user && <Button className={s.addTask} type="default" size="large" icon={<PlusOutlined/>} onClick={()=>toggleModalForAddingTaskVisible(!isModalForAddingTaskVisible)}></Button>}
                     <Button className={s.saveTable} size="large" type="default" icon={<SaveOutlined />}></Button>
                 </div>
                 <div className={s.right_buttons_block}>
                     <Button className={s.button} type="default" size="large" onClick={toggleUser}>
-                        {user?"Студент":"Ментор"}
+                        {user?"Ментор":"Студент"}
                     </Button>
                 </div>
             </div>
+            <AddingTaskForm
+              isModalForAddingTaskVisible={isModalForAddingTaskVisible}
+              toggleModalForAddingTaskVisible={toggleModalForAddingTaskVisible}
+              formName='Введите данные'
+            />
         </header>
     );
 }
