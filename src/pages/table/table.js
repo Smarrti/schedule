@@ -1,3 +1,4 @@
+
 import React, { useContext, useState } from "react";
 import { Table } from "antd";
 import { DataContext } from "@lib/fetching";
@@ -23,6 +24,7 @@ const MyTable = () => {
     false
   );
 
+
   const toggleModalForAddingTaskVisible = (isOpen) => {
     setModalAddingTaskVisible(() => {
       return isOpen;
@@ -32,7 +34,6 @@ const MyTable = () => {
   const expandable = {
     expandedRowRender: !user ? ({ id }) => <DeleteButton id={id} /> : null,
   };
-
   return (
     <>
       <div className={classes.table}>
