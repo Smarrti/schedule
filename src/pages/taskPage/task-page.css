@@ -1,0 +1,23 @@
+.task-page {
+    position: fixed;
+    z-index: 9;
+}
+
+.task-page-background {
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    opacity: 0.5;
+    position: fixed;
+    top: 0;
+    z-index: 9;
+}
+
+.task-page-wrapper {
+    position: relative;
+    width: 80vw;
+    height: 80vh;
+    background-color: white;
+    margin: auto 10vw;
+    z-index: 99;
+}

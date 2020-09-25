@@ -12,13 +12,17 @@ import { AddingTaskBtn } from "@features/adding-task-btn";
 import { AddingTaskForm } from "@features/adding-task-form";
 import { columns, setRowStyleByType } from "./model";
 import { ColumnCheckbox } from "@features/columns-checkbox"
+import { TaskPage } from "@pages/taskPage/task-page"
+
 import classes from "./style.module.css";
 
 const MyTable = () => {
   const data = useContext(DataContext);
 
   const [ selectedColumns, setSelectedColumns ] = useState(localStorage.getItem('selectedBoxes'));
-  
+  const [ taskPageVisible, setPageVisible ] = useState(false);
+  const [ taskPageContent, setTaskPageContent ] = useState({});
+
   const refreshTable = () => {
     setSelectedColumns(localStorage.getItem('selectedBoxes'));
   };
@@ -30,12 +34,16 @@ const MyTable = () => {
     false
   );
 
-
   const toggleModalForAddingTaskVisible = (isOpen) => {
     setModalAddingTaskVisible(() => {
       return isOpen;
     });
   };
+
+  const taskPageRender = (record) => {
+    setPageVisible(true);
+    setTaskPageContent(record)
+  }
 
   const visibleColumns = selectedColumns ? columns.filter((column) => selectedColumns.includes(column.title)) : columns;
 
@@ -53,7 +61,15 @@ const MyTable = () => {
           toggleModalForAddingTaskVisible={toggleModalForAddingTaskVisible}
         />
       </div>
+      <TaskPage 
+        visible={taskPageVisible} 
+        content={taskPageContent}/>
       <Table
+        onRow={(record) => {
+          return {
+            onClick: () => {taskPageRender(record)},
+          }
+        }}
         columns={visibleColumns}
         size={tableSize}
         expandable={expandable}
