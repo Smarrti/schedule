@@ -1,15 +1,12 @@
-import React, { createContext, useState, useEffect } from "react"
-import { getTasks } from '@lib/getTasks';
-export const DataContext = createContext()
+import React, { createContext, useState, useEffect } from "react";
 import {eventsAPI} from "../../api/events-api";
-
 export const DataContext = createContext();
 
 const DataProvider = ({ children }) => {
-  const [data, setData] = useState(null)
+  const [data, setData] = useState(null);
 
 const fetchData =  async () => {
-    const res = await eventsAPI.getEvents()
+    const res = await eventsAPI.getEvents();
     setData(res.data.map(item => {
         return { key: item.id, ...item}
       }
