@@ -1,3 +1,4 @@
+
 import React, { useContext, useState } from "react";
 import { Table } from "antd";
 import { DataContext } from "@lib/fetching";
@@ -10,11 +11,17 @@ import { TableCustomization } from "@features/customization";
 import { AddingTaskBtn } from "@features/adding-task-btn";
 import { AddingTaskForm } from "@features/adding-task-form";
 import { columns, setRowStyleByType } from "./model";
+import { ColumnCheckbox } from "@features/columns-checkbox"
 import classes from "./style.module.css";
 
 const MyTable = () => {
   const data = useContext(DataContext);
 
+  const [ selectedColumns, setSelectedColumns ] = useState(localStorage.getItem('selectedBoxes'));
+  
+  const refreshTable = () => {
+    setSelectedColumns(localStorage.getItem('selectedBoxes'));
+  };
   const { user } = useContext(Role);
   const { tableSize } = useContext(Size);
   const { table } = useContext(Style);
@@ -23,20 +30,23 @@ const MyTable = () => {
     false
   );
 
+
   const toggleModalForAddingTaskVisible = (isOpen) => {
     setModalAddingTaskVisible(() => {
       return isOpen;
     });
   };
 
+  const visibleColumns = selectedColumns ? columns.filter((column) => selectedColumns.includes(column.title)) : columns;
+
   const expandable = {
     expandedRowRender: !user ? ({ id }) => <DeleteButton id={id} /> : null,
   };
-
   return (
     <>
       <div className={classes.table}>
         <TableSizing />
+        <ColumnCheckbox refresh={refreshTable}/>
         <TableCustomization />
         <AddingTaskBtn
           isModalForAddingTaskVisible={isModalForAddingTaskVisible}
@@ -44,7 +54,7 @@ const MyTable = () => {
         />
       </div>
       <Table
-        columns={columns}
+        columns={visibleColumns}
         size={tableSize}
         expandable={expandable}
         dataSource={data}

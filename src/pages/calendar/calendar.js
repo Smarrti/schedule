@@ -62,8 +62,6 @@ const MyCalendar = () => {
     )
   }
 
-  console.log(calendarSize)
-
   return data ? (
     <>
       <CalendarSizing />
