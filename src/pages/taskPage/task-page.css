@@ -21,3 +21,22 @@
     margin: auto 10vw;
     z-index: 99;
 }
+
+.modal-block {
+    display: flex;
+}
+
+.modal-line {
+    display: flex;
+    align-items: center;
+    margin: 5px;
+    width: fit-content;
+}
+
+.modal-line span {
+    margin-left: 5px;
+}
+
+.material-icons {
+    font-size: 18px;
+}
