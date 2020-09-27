@@ -40,3 +40,7 @@
 .material-icons {
     font-size: 18px;
 }
+
+.modal-options {
+    display: grid;
+}

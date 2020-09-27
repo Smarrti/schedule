@@ -41,9 +41,15 @@ const MyTable = () => {
   };
 
   const taskPageRender = (record) => {
-    setPageVisible(true);
-    setTaskPageContent(record)
-  }
+    if(user) {
+      onPageClose();
+      setTaskPageContent(record);
+    };
+  };
+
+  const onPageClose = () => {
+    setPageVisible(!taskPageVisible);
+  };
 
   const visibleColumns = selectedColumns ? columns.filter((column) => selectedColumns.includes(column.title)) : columns;
 
@@ -62,6 +68,7 @@ const MyTable = () => {
         />
       </div>
       <TaskPage 
+        onPageClose={onPageClose}
         visible={taskPageVisible} 
         content={taskPageContent}/>
       <Table

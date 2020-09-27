@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Modal, Avatar, Empty, Input } from 'antd';
 import { UserOutlined, 
          CalendarOutlined, 
@@ -7,22 +7,18 @@ import { YMaps, Map } from 'react-yandex-maps';
 import './task-page.css'
 
 const TaskPage = (props) => {
-    const [ isModalVisible, setModalVisible ] = useState(false);
-    const {content} = props;
-    useEffect(() => {
-        setModalVisible(props.visible);
-    })
+    const {content, onPageClose, visible } = props;
 
     const { TextArea } = Input;
 
-    console.log(content)
-
     return(
         <Modal 
-          title={`${content.type} - ${content.name}`}
+          title={`${content.type || 'Мероприятие'} - ${content.name}`}
           centered
-          visible={isModalVisible}
-          onOk={() => setModalVisible(false)}
+          visible={visible}
+          okText="Оставить отзыв"
+          onOk={() => onPageClose()}
+          onCancel={() => onPageClose()}
         >
           <div className="modal-block">
             <div className="modal-line">
@@ -42,15 +38,14 @@ const TaskPage = (props) => {
             <Avatar icon={<UserOutlined />} />
             <span>{content.author}</span>
           </div>
-          <div>
+          <div className="modal-options">
             <span>Дополнительная информация, полезные ссылки, фото и видео:</span>
-            <span>{content.optional}</span>
-            <Empty />
+            {content.optional === '' ? <Empty /> : <span>{content.optional}</span>}          
           </div>
           <div className="modal-line">
             <span className="material-icons">location_on</span>
             <span>{content.place}</span>
-          </div>
+          </div >
           <YMaps>
             <Map defaultState={{ center: [55.75, 37.57], zoom: 9 }} />
           </YMaps>
@@ -59,7 +54,6 @@ const TaskPage = (props) => {
             <TextArea />
           </div>
         </Modal>
-
     )
 };
 
