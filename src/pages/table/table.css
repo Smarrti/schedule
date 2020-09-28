@@ -5,3 +5,15 @@
 .table__settings > * {
   margin-right: 10px;
 }
+.button {
+  margin-right: 5px;
+}
+.addTask, .editTask, .deleteTask {
+  margin-right: 5px;
+}
+.show {
+  display: block;
+}
+.hide {
+  display: none;
+}

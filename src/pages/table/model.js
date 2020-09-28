@@ -1,6 +1,14 @@
-import React from "react";
-import { MyTag } from "@ui";
-import classes from "@features/customization/style.module.css";
+
+import React from "react"
+import { MyTag } from "@ui"
+
+import { Button } from "antd";
+import s from "../Header/header.module.css";
+import EditOutlined from "@ant-design/icons/lib/icons/EditOutlined";
+import DeleteOutlined from "@ant-design/icons/lib/icons/DeleteOutlined";
+import {deleteEvent} from "../../lib/redux/eventsReducer";
+import {useDispatch} from "react-redux";
+
 
 export const setRowStyleByType = (type, table) => {
   switch (type) {
@@ -17,9 +25,21 @@ export const setRowStyleByType = (type, table) => {
     default:
       return null;
   }
-};
+}
+const dispatch = useDispatch();
 
 export const columns = [
+  {
+    title: 'Действия',
+    key: 'action',
+    sorter: false,
+    render: (text, record) => (
+        <div>
+          <Button data-key={record.id} className={s.editTask} size="large" type="default" icon={<EditOutlined />}></Button>
+          <Button data-key={record.id} className={s.deleteTask} size="large" type="default" icon={<DeleteOutlined/>} onClick={onDelete}></Button>
+        </div>
+    ),
+  },
   {
     title: "Дата",
     dataIndex: "date",
