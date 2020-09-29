@@ -1,35 +1,38 @@
+import {eventsAPI} from "../../api/events-api";
 
 let InitialState = {
     events: [],
-    pageSize: 10,
-    totalEventsCount: 0,
-    currentPage: 1,
     isLoading: false,
+    isMentor: false,
+    isModalForAddingTaskVisible: false,
+    eventChange: {}
 };
-
-const eventsReducer = (state = InitialState, actions) => {
+const eventsReducer = (state = InitialState, action) => {
     switch (action.type) {
         case 'SET_EVENTS':
             return {
                 ...state,
                 events: [...action.events]
             }
-        case 'ADD_EVENT': {
-            return {
-                ...state,
-                events: [...state.events, action.newEvent]
-            }
-        }
-        case 'SET_CURRENT_PAGE': {
-            return {
-                ...state,
-                currentPage: action.currentPage
-            }
-        }
         case 'TOGGLE_IS_LOADING': {
             return {
                 ...state, isLoading: action.isLoading
             }
+        }
+        case 'TOGGLE_RIGHTS': {
+          return {
+            ...state, isMentor: action.isMentor
+          }
+        }
+        case 'MODAL_VISIBLE': {
+          return {
+            ...state, isModalForAddingTaskVisible: action.isModalForAddingTaskVisible
+          }
+        }
+        case 'SET_EVENT': {
+          return {
+            ...state, eventChange: action.eventId!==null?{...state.events.filter(item => item.id === action.eventId)[0]}:{}
+          }
         }
         default:
             return state;
@@ -38,13 +41,36 @@ const eventsReducer = (state = InitialState, actions) => {
 export const actions = {
     setEvents: (events) => ({type: 'SET_EVENTS', events}),
     toggleIsLoading: (isLoading) => ({type: 'TOGGLE_IS_LOADING', isLoading}),
-    setCurrentPage: (currentPage) => ({type: 'SET_CURRENT_PAGE', currentPage}),
-    addEvent: (newEvent) => ({type: 'ADD_EVENT', newEvent})
+    toggleRights: (isMentor) => ({type:'TOGGLE_RIGHTS', isMentor: isMentor}),
+    setModalAddingTaskVisible: (isModalForAddingTaskVisible) => ({type: 'MODAL_VISIBLE', isModalForAddingTaskVisible}),
+    setEventChange: (eventId) => ({type: 'SET_EVENT', eventId: eventId})
 }
-export const requestEvents = (page, pageSize) => async (dispatch) => {
+export const requestEvents = () => async (dispatch) => {
+    let events = await eventsAPI.getEvents();
+    dispatch(actions.setEvents(events.data));
+}
+export const saveEvent = (event) => async (dispatch) => {
     dispatch(actions.toggleIsLoading(true));
-    dispatch(actions.setCurrentPage(page));
-    let data = await eventsAPI.getEvents();
+    let data = await eventsAPI.addEvent(event);
+    if(data.id!==undefined){
+        dispatch(requestEvents())
+    }
     dispatch(actions.toggleIsLoading(false));
-    dispatch(actions.setEvents(data));
 }
+export const deleteEvent = (eventId) => async (dispatch) => {
+  dispatch(actions.toggleIsLoading(true));
+  let data = await eventsAPI.deleteEvent(eventId);
+  if(data.id!==undefined){
+    dispatch(requestEvents())
+  }
+  dispatch(actions.toggleIsLoading(false));
+}
+export const updateEvent = (event, eventId) => async (dispatch) => {
+  dispatch(actions.toggleIsLoading(true));
+  let data = await eventsAPI.updateEvent(event, eventId);
+  if(data.id!==undefined){
+    dispatch(requestEvents())
+  }
+  dispatch(actions.toggleIsLoading(false));
+}
+export default eventsReducer;

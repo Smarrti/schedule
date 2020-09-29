@@ -33,3 +33,11 @@
 .redFont {
   color: red;
 }
+.right_block{
+  display: flex;
+}
+.table {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
