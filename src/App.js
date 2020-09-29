@@ -6,20 +6,21 @@ import {
   OrderedListOutlined,
 } from "@ant-design/icons";
 import { MyTable, MyCalendar, Header } from "@pages";
-import { DataProvider } from "@lib/fetching";
 import { SizeContext } from "@lib/sizing";
 import { StyleContext } from "@lib/customization";
 import { RoleContext } from "@lib/roles";
+import { Provider } from "react-redux";
+import store from "./lib/redux/store";
 
 const { TabPane } = Tabs;
 
 const App = () => {
   return (
-    <DataProvider>
+    <Provider store={store}>
       <RoleContext>
         <StyleContext>
+          <Header />
           <SizeContext>
-            <Header />
             <Tabs defaultActiveKey="1">
               <TabPane
                 tab={
@@ -58,7 +59,7 @@ const App = () => {
           </SizeContext>
         </StyleContext>
       </RoleContext>
-    </DataProvider>
+    </Provider>
   );
 };
 

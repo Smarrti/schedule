@@ -6,7 +6,7 @@ import './checkbox-list.css';
 const CheckboxList = () => {
     const list = columns.map((column) => column.title);
     const [ selectedValue, setSelectedValue ] = useState(localStorage.getItem('selectedBoxes') || list);
-    
+
     const checkItem = (checkedValue) => {
         setSelectedValue(checkedValue);
     };
@@ -16,9 +16,7 @@ const CheckboxList = () => {
     });
 
     return(
-        <div>
-            <Checkbox.Group className="checkbox-list" options={list} value={selectedValue} onChange={checkItem}/>
-        </div>
+      <Checkbox.Group className="checkbox-list" options={list} value={selectedValue} onChange={checkItem}/>
     );
 };
 

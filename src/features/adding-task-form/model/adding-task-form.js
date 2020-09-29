@@ -1,12 +1,14 @@
+
+
 export const handleAddingTaskForm = ({
-  name, date, time, duration, author, format, tags, materials = '', place
-}) => {
+                                       name, date, time, duration, author, format, tags, materials = '', place}, addEvent, updateEvent, isUpdate, eventId
+) => {
   let type;
   switch (format) {
     case 'lection':
       type = 'Лекция';
       break;
-    case 'pactik':
+    case 'practik':
       type = 'Практическое занятие';
       break;
     default:
@@ -23,18 +25,5 @@ export const handleAddingTaskForm = ({
     place,
     optional: materials
   };
-  console.log(JSON.stringify(taskContent));
-  fetch(
-    `https://rs-react-schedule.firebaseapp.com/api/team/sh36team/event/`,
-    {
-      method: "POST",
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(taskContent)
-    }
-  )
-  .then(() => console.log('Good!'))
-  .catch(() => console.log('bad'))
+  isUpdate?updateEvent(taskContent, eventId):addEvent(taskContent);
 }

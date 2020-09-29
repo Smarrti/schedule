@@ -1,24 +1,32 @@
+import React, {useContext, useEffect, useState} from "react";
+import {Button, Table} from "antd";
+import {Role} from "@lib/roles";
+import {Size} from "@lib/sizing";
+import s from "../Header/header.module.css";
+import {Style} from "@lib/customization";
+import {DeleteButton} from "@features/deleting";
+import {TableSizing} from "@features/sizing";
+import {useDispatch, useSelector} from "react-redux";
+import {getEvents, getIsLoading, getModalForAddingTaskVisible, getRights} from "../../lib/redux/selectors";
+import {TableCustomization} from "@features/customization";
+import {ColumnCheckbox} from "@features/columns-checkbox"
+import {TaskPage} from "@pages/taskPage/task-page"
+import EditOutlined from "@ant-design/icons/lib/icons/EditOutlined";
+import DeleteOutlined from "@ant-design/icons/lib/icons/DeleteOutlined";
+import {MyTag} from "../../ui/atoms";
+import classes from "@features/customization/style.module.css"
+import tStyle from "./table.css"
 
-import React, { useContext, useState } from "react";
-import { Table } from "antd";
-import { DataContext } from "@lib/fetching";
-import { Role } from "@lib/roles";
-import { Size } from "@lib/sizing";
-import { Style } from "@lib/customization";
-import { DeleteButton } from "@features/deleting";
-import { TableSizing } from "@features/sizing";
-import { TableCustomization } from "@features/customization";
-import { AddingTaskBtn } from "@features/adding-task-btn";
-import { AddingTaskForm } from "@features/adding-task-form";
-import { columns, setRowStyleByType } from "./model";
-import { ColumnCheckbox } from "@features/columns-checkbox"
-import { TaskPage } from "@pages/taskPage/task-page"
-
-import classes from "./style.module.css";
+import {actions, deleteEvent, requestEvents} from "../../lib/redux/eventsReducer";
 
 const MyTable = () => {
-  const data = useContext(DataContext);
-
+  const events = useSelector(getEvents);
+  const isLoading = useSelector(getIsLoading);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(requestEvents())
+  }, [dispatch]);
+  const isMentor = useSelector(getRights);
   const [ selectedColumns, setSelectedColumns ] = useState(localStorage.getItem('selectedBoxes'));
   const [ taskPageVisible, setPageVisible ] = useState(false);
   const [ taskPageContent, setTaskPageContent ] = useState({});
@@ -30,18 +38,21 @@ const MyTable = () => {
   const { tableSize } = useContext(Size);
   const { table } = useContext(Style);
 
-  const [isModalForAddingTaskVisible, setModalAddingTaskVisible] = useState(
-    false
-  );
-
+  const onDelete = (e)=> {
+    dispatch(deleteEvent(e.currentTarget.dataset.key))
+  }
+  const isModalForAddingTaskVisible = useSelector(getModalForAddingTaskVisible);
   const toggleModalForAddingTaskVisible = (isOpen) => {
-    setModalAddingTaskVisible(() => {
-      return isOpen;
-    });
-  };
+    dispatch(actions.setModalAddingTaskVisible(isOpen));
+  }
+  const onEdit = (e) => {
+    dispatch(actions.setEventChange(e.currentTarget.dataset.key));
+    toggleModalForAddingTaskVisible(!isModalForAddingTaskVisible);
+  }
 
-  const taskPageRender = (record) => {
-    if(user) {
+  const taskPageRender = (record, e) => {
+    console.log(e.target.type);
+    if(!isMentor) {
       onPageClose();
       setTaskPageContent(record);
     };
@@ -51,42 +62,119 @@ const MyTable = () => {
     setPageVisible(!taskPageVisible);
   };
 
-  const visibleColumns = selectedColumns ? columns.filter((column) => selectedColumns.includes(column.title)) : columns;
 
   const expandable = {
     expandedRowRender: !user ? ({ id }) => <DeleteButton id={id} /> : null,
   };
+  const columns = [
+    {
+      title: 'Действия',
+      key: 'action',
+      sorter: false,
+      className: isMentor?`show`:`hide`,
+      render: (text, record) => {
+        return <div>
+          <Button data-key={record.id} className={s.editTask} size="large" type="default" icon={<EditOutlined/>} onClick={onEdit}></Button>
+          <Button data-key={record.id} className={s.deleteTask} size="large" type="default" icon={<DeleteOutlined/>} onClick={onDelete}></Button>
+        </div>
+      },
+    },
+    {
+      title: "Дата",
+      dataIndex: "date",
+      key: "date",
+    },
+    {
+      title: "Время начала",
+      dataIndex: "time",
+      key: "time",
+    },
+    {
+      title: "Длительность",
+      dataIndex: "duration",
+      key: "duration",
+    },
+    {
+      title: "Название",
+      dataIndex: "name",
+      key: "name",
+      render: (name) => <a href="/#">{name}</a>,
+    },
+    {
+      title: "Лектор",
+      dataIndex: "author",
+      key: "author",
+      render: (author) => <a href="/#">{author}</a>,
+    },
+    {
+      title: "Формат",
+      dataIndex: "type",
+      key: "type",
+    },
+    {
+      title: "Теги",
+      dataIndex: "tags",
+      key: "tags",
+      render: (tags) => <MyTag tags={tags} />,
+    },
+    {
+      title: "Место",
+      dataIndex: "place",
+      key: "place",
+    },
+    {
+      title: "Доп. материалы",
+      dataIndex: "optional",
+      key: "optional",
+      render: (optional) => <a href="/#">{optional}</a>,
+    },
+  ]
+  const setRowStyleByType = (type, table) => {
+    switch (type) {
+      case "Лекция":
+        return [
+          classes[table.lecture.background],
+          classes[table.lecture.fontColor],
+        ]
+      case "Практическое занятие":
+        return [
+          classes[table.practice.background],
+          classes[table.practice.fontColor],
+        ]
+      default:
+        return null
+    }
+  }
+  const visibleColumns = selectedColumns ? columns.filter((column) => selectedColumns.includes(column.title)) : columns;
   return (
     <>
       <div className={classes.table}>
-        <TableSizing />
-        <ColumnCheckbox refresh={refreshTable}/>
-        <TableCustomization />
-        <AddingTaskBtn
-          isModalForAddingTaskVisible={isModalForAddingTaskVisible}
-          toggleModalForAddingTaskVisible={toggleModalForAddingTaskVisible}
-        />
+          <TableSizing />
+          <div className={classes.right_block}>
+            <ColumnCheckbox refresh={refreshTable}/>
+            <TableCustomization />
+          </div>
       </div>
-      <TaskPage 
+      <TaskPage
         onPageClose={onPageClose}
-        visible={taskPageVisible} 
+        visible={taskPageVisible}
         content={taskPageContent}/>
       <Table
+        rowKey={events => events.id}
         onRow={(record) => {
           return {
-            onClick: () => {taskPageRender(record)},
+            onClick: (e) => {
+
+              taskPageRender(record, e)
           }
         }}
+        }
         columns={visibleColumns}
         size={tableSize}
-        expandable={expandable}
-        dataSource={data}
+        dataSource={events}
         rowClassName={(record) => setRowStyleByType(record.type, table)}
         scroll={{ x: true }}
-      />
-      <AddingTaskForm
-        isModalForAddingTaskVisible={isModalForAddingTaskVisible}
-        toggleModalForAddingTaskVisible={toggleModalForAddingTaskVisible}
+        loading = {isLoading}
       />
     </>
   );
