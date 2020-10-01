@@ -1,13 +1,14 @@
 import React, { useContext } from "react"
 import { Calendar, Button } from "antd"
-import { DataContext } from "@lib/fetching"
 import { Size } from "@lib/sizing"
 import { CalendarSizing } from "@features/sizing"
 import { Spinner } from "@ui"
 import "./calendar.css"
+import {getEvents} from "../../lib/redux/selectors";
+import {useSelector} from "react-redux";
 
 const MyCalendar = () => {
-  const data = useContext(DataContext)
+  const data = useSelector(getEvents);
   const { calendarSize } = useContext(Size)
 
   const eventClasses = (item) => {
