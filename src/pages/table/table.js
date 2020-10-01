@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, {useContext, useEffect, useState} from "react";
 import {Button, Table} from "antd";
 import {Role} from "@lib/roles";
