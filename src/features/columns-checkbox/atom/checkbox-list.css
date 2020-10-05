@@ -1,0 +1,8 @@
+.checkbox-list {
+    display: grid;
+    position: absolute;
+    z-index: 1;
+    background: white;
+    padding: 10px;
+    border: 1px solid #1d8efa;
+}

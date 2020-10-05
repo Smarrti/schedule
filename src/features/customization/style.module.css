@@ -1,0 +1,43 @@
+.blueBG {
+  background-color: #6ed2e9;
+}
+
+.orangeBG {
+  background-color: #ffa500;
+}
+
+.pinkBG {
+  background-color: #f5cad1;
+}
+
+.greenBG {
+  background-color: #acef79;
+}
+
+.redBG {
+  background-color: #ec303b;
+}
+
+.blackFont {
+  color: black;
+}
+
+.blueFont {
+  color: blue;
+}
+
+.greenFont {
+  color: green;
+}
+
+.redFont {
+  color: red;
+}
+.right_block{
+  display: flex;
+}
+.table {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}

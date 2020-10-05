@@ -1,0 +1,20 @@
+.calendar-events {
+    padding: 0;
+    list-style: none;
+    text-align: center;
+}
+
+.blue {
+    background: blue;
+    border: blue;
+}
+
+.green {
+    background: green;
+    border: green;
+}
+
+.orange {
+    background: orange;
+    border: orange;
+}
